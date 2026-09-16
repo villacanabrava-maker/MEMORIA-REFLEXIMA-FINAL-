@@ -21,9 +21,19 @@ export default async function ProtectedLayout({
   return (
     <div className="flex flex-1 flex-col">
       <header className="flex items-center justify-between border-b px-6 py-4">
-        <Link href="/inicio" className="text-sm font-semibold tracking-wide uppercase">
-          Memória Reflexiva
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/inicio" className="text-sm font-semibold tracking-wide uppercase">
+            Memória Reflexiva
+          </Link>
+          <nav className="flex items-center gap-4">
+            <Link href="/inicio" className="text-muted-foreground text-sm hover:text-foreground">
+              Início
+            </Link>
+            <Link href="/memoria" className="text-muted-foreground text-sm hover:text-foreground">
+              Memória
+            </Link>
+          </nav>
+        </div>
         <LogoutButton />
       </header>
       <main className="flex flex-1 flex-col">{children}</main>

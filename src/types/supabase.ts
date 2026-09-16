@@ -62,6 +62,127 @@ export type Database = {
           },
         ]
       }
+      historical_reflection_chunks: {
+        Row: {
+          chunk_index: number
+          content: string
+          created_at: string
+          embedding: string | null
+          embedding_dimensions: number | null
+          embedding_model: string | null
+          historical_reflection_id: string
+          id: string
+          pipeline_version: string
+          user_id: string
+        }
+        Insert: {
+          chunk_index: number
+          content: string
+          created_at?: string
+          embedding?: string | null
+          embedding_dimensions?: number | null
+          embedding_model?: string | null
+          historical_reflection_id: string
+          id?: string
+          pipeline_version?: string
+          user_id: string
+        }
+        Update: {
+          chunk_index?: number
+          content?: string
+          created_at?: string
+          embedding?: string | null
+          embedding_dimensions?: number | null
+          embedding_model?: string | null
+          historical_reflection_id?: string
+          id?: string
+          pipeline_version?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "historical_reflection_chunks_historical_reflection_id_fkey"
+            columns: ["historical_reflection_id"]
+            isOneToOne: false
+            referencedRelation: "historical_reflections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      historical_reflections: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          memory_import_id: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          memory_import_id?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          memory_import_id?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "historical_reflections_memory_import_id_fkey"
+            columns: ["memory_import_id"]
+            isOneToOne: false
+            referencedRelation: "memory_imports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      memory_imports: {
+        Row: {
+          created_at: string
+          error: string | null
+          id: string
+          mime_type: string
+          original_filename: string
+          status: string
+          storage_path: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          error?: string | null
+          id?: string
+          mime_type: string
+          original_filename: string
+          status?: string
+          storage_path: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          error?: string | null
+          id?: string
+          mime_type?: string
+          original_filename?: string
+          status?: string
+          storage_path?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -150,7 +271,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      match_historical_reflection_chunks: {
+        Args: {
+          match_count?: number
+          match_threshold?: number
+          query_embedding: string
+        }
+        Returns: {
+          content: string
+          historical_reflection_id: string
+          id: string
+          similarity: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
