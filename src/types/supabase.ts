@@ -18,6 +18,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      daily_sources: {
+        Row: {
+          author: string | null
+          body: string
+          created_at: string
+          id: string
+          session_id: string
+          source_date: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          author?: string | null
+          body: string
+          created_at?: string
+          id?: string
+          session_id: string
+          source_date: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          author?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+          session_id?: string
+          source_date?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_sources_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: true
+            referencedRelation: "reflection_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -39,6 +83,65 @@ export type Database = {
           email?: string
           id?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      reflection_comments: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          session_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          session_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          session_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reflection_comments_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: true
+            referencedRelation: "reflection_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reflection_sessions: {
+        Row: {
+          created_at: string
+          id: string
+          session_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          session_date?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          session_date?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
