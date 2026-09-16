@@ -29,7 +29,7 @@ export function SignUpForm() {
       email: values.email,
       password: values.password,
       options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     });
     setIsSubmitting(false);

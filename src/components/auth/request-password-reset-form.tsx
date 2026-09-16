@@ -31,7 +31,7 @@ export function RequestPasswordResetForm() {
     const { error } = await supabase.auth.resetPasswordForEmail(
       values.email,
       {
-        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/redefinir-senha`,
+        redirectTo: `${window.location.origin}/redefinir-senha`,
       },
     );
     setIsSubmitting(false);
